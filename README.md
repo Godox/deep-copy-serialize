@@ -4,7 +4,8 @@ A Kotlin Multiplatform project that deep-clones `@Serializable` values.
 
 The cloning logic lives in `commonMain` and works on every Kotlin target. It uses
 a tiny custom Kotlin serialization format: a value is encoded into an in-memory
-list of its primitive components and decoded straight back into a new instance.
+`ArrayDeque` of its primitive components and decoded straight back into a new
+instance.
 
 ## Cloneable annotation
 
@@ -19,18 +20,31 @@ data class Holder(val value: Int)
 
 ## How cloning works
 
-1. **Encode** — `ClonerEncoder` (an `AbstractEncoder`) walks the object graph
+1. **Guard** — `Cloner.clone` returns `null` immediately when the input is
+   `null`.
+2. **Encode** — `ClonerEncoder` (an `AbstractEncoder`) walks the object graph
    using the compiler-generated serializer. Every primitive value is appended to
-   a flat in-memory `List<Any?>`. Nested objects and collections are encoded
-   recursively into the same list; collections store their size before their
-   elements, and nullable values are marked with a `"!!"` / `"NULL"` marker.
-2. **Decode** — `ClonerDecoder` (an `AbstractDecoder`) reads that list back with
-   an `ArrayDeque`. It pops values in the same order, reconstructs nested
-   objects and collections, and returns a brand-new instance.
+   an in-memory `ArrayDeque<Any?>` (`serializedValues`). Nested objects and
+   collections are encoded recursively into the same deque; collections store
+   their size before their elements. Nullable values are marked with a `Boolean`
+   marker (`true` for a present value, `false` for `null`), so a `String` such
+   as `"NULL"` or `"!!"` can never be confused with a marker.
+3. **Decode** — `ClonerDecoder` (an `AbstractDecoder`) reads that deque back.
+   It pops values in the same order, reconstructs nested objects and
+   collections, and returns a brand-new instance. `elementsCount` tracks how many
+   elements belong to the current structure so `decodeElementIndex()` can signal
+   `DECODE_DONE` at the right point.
 
 Because every primitive, nested object, and collection is recreated during
-decoding, the result is a true deep copy: the clone shares no mutable state with
-the original.
+decoding, the result is a true deep copy: the clone shares no mutable state
+with the original.
+
+Convenience extensions are also available:
+
+```kotlin
+val copy = original.clone()
+val copy2 = original.clone(serializersModule)
+```
 
 ## Usage
 
