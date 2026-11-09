@@ -150,6 +150,12 @@ The "Data class copy" column measures a hand-written deep copy using
 
 ## Targets
 
-`jvm()` is enabled by default. Uncomment additional targets in
-`build.gradle.kts` (`linuxX64()`, `iosArm64()`, `js(IR)`, `wasmJs()`, …) to
-target them. Kotlin/Native compilation requires a supported host platform.
+All Kotlin Multiplatform targets are enabled in `build.gradle.kts`:
+
+- JVM
+- JS (IR) — browser and Node.js
+- Wasm (JS) — browser and Node.js
+- Native: Linux (x64/arm64), Windows (mingwX64), macOS (x64/arm64),
+  iOS (x64/arm64/simulator), tvOS, watchOS
+
+Kotlin/Native compilation requires a supported host platform.
