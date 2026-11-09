@@ -17,9 +17,23 @@ tasks.withType<Test>().configureEach {
 
 kotlin {
     jvm()
-    // Add more targets here as needed, e.g. linuxX64(), iosArm64(), js(IR), wasmJs()
-    // Note: Kotlin/Native compilation requires a supported host (Linux x86_64, macOS, Windows).
-    // linuxArm64()
+    js(IR) { browser(); nodejs() }
+    wasmJs { browser(); nodejs() }
+
+    linuxX64()
+    linuxArm64()
+    mingwX64()
+    macosX64()
+    macosArm64()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    tvosX64()
+    tvosArm64()
+    tvosSimulatorArm64()
+    watchosX64()
+    watchosArm64()
+    watchosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
