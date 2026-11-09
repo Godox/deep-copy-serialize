@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "io.github.godox"
-version = "1.0.0"
+version = "1.0.1"
 
 gradlePlugin {
     plugins {
