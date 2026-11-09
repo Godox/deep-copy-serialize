@@ -1,4 +1,4 @@
-package com.example.cloner
+package io.github.godox.cloner
 
 import kotlin.test.Test
 import kotlin.test.assertTrue

@@ -1,1 +1,1 @@
-rootProject.name = "serial-cloner"
+rootProject.name = "deep-copy-serialize"

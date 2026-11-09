@@ -1,4 +1,4 @@
-package com.example.cloner
+package io.github.godox.cloner
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.MetaSerializable

@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "2.3.21"
 }
 
-group = "com.example"
+group = "io.github.godox"
 version = "1.0.0"
 
 repositories {

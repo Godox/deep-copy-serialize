@@ -87,7 +87,7 @@ println(original.tags === copy.tags)       // false
 ## Usage
 
 ```kotlin
-import com.example.cloner.Cloner
+import io.github.godox.cloner.Cloner
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -113,7 +113,7 @@ in your module:
 ```kotlin
 plugins {
     kotlin("multiplatform") // or kotlin("jvm")
-    id("com.example.cloner") version "1.0.0"
+    id("io.github.godox.cloner") version "1.0.0"
 }
 ```
 
@@ -146,7 +146,7 @@ size 10 times and averaging. `BenchItem` holds an `Int`, a `String` and a
 The "Data class copy" column measures a hand-written deep copy using
 `copy()` plus `toMutableList()` on the nested list. The benchmark lives in
 `commonTest` (`BenchmarkTest`) and can be re-run with
-`./gradlew jvmTest --tests "com.example.cloner.BenchmarkTest"`.
+`./gradlew jvmTest --tests "io.github.godox.cloner.BenchmarkTest"`.
 
 ## Targets
 
