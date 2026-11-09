@@ -7,6 +7,43 @@ a tiny custom Kotlin serialization format: a value is encoded into an in-memory
 `ArrayDeque` of its primitive components and decoded straight back into a new
 instance.
 
+## Minimal setup
+
+```kotlin
+// build.gradle.kts
+plugins {
+    kotlin("multiplatform") version "2.3.21"
+    kotlin("plugin.serialization") version "2.3.21"
+}
+
+kotlin {
+    jvm()
+    sourceSets.commonMain.dependencies {
+        implementation("io.github.godox:deep-copy-serialize:1.0.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1")
+    }
+}
+```
+
+```kotlin
+import io.github.godox.cloner.clone
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Address(val city: String)
+
+@Serializable
+data class Person(val name: String, val address: Address)
+
+fun main() {
+    val original = Person("Ada", Address("Paris"))
+    val copy = original.clone()
+
+    println(original === copy)            // false
+    println(original.address === copy.address) // false  (deep clone)
+}
+```
+
 ## Cloneable annotation
 
 Instead of `@Serializable`, you can annotate a class with `@Cloneable` (a
@@ -87,7 +124,7 @@ println(original.tags === copy.tags)       // false
 ## Usage
 
 ```kotlin
-import io.github.godox.cloner.Cloner
+import io.github.godox.cloner.clone
 import kotlinx.serialization.Serializable
 
 @Serializable
