@@ -1,7 +1,7 @@
-package com.example.cloner.gradle
+package io.github.godox.cloner.gradle
 
 /**
- * Configuration for the `com.example.cloner` Gradle plugin.
+ * Configuration for the `io.github.godox.cloner` Gradle plugin.
  */
 open class ClonerExtension {
     /**

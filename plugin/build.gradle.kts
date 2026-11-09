@@ -3,14 +3,14 @@ plugins {
     `java-gradle-plugin`
 }
 
-group = "com.example"
+group = "io.github.godox"
 version = "1.0.0"
 
 gradlePlugin {
     plugins {
         create("cloner") {
-            id = "com.example.cloner"
-            implementationClass = "com.example.cloner.gradle.ClonerPlugin"
+            id = "io.github.godox.cloner"
+            implementationClass = "io.github.godox.cloner.gradle.ClonerPlugin"
         }
     }
 }

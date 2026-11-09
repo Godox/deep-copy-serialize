@@ -1,4 +1,4 @@
-package com.example.cloner.gradle
+package io.github.godox.cloner.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
