@@ -121,51 +121,7 @@ println(original.address === copy.address) // false
 println(original.tags === copy.tags)       // false
 ```
 
-## Usage
 
-```kotlin
-import io.github.godox.cloner.clone
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class Person(val name: String, val age: Int, val tags: List<String> = emptyList())
-
-fun main() {
-    val original = Person("Ada", 36, listOf("dev", "math"))
-    val copy = Cloner.clone(original)   // deep copy
-}
-```
-
-Polymorphic values are supported by passing a `SerializersModule`:
-
-```kotlin
-val clone = Cloner.clone(value, serializersModule)
-```
-
-## Gradle plugin
-
-To avoid configuring kotlinx-serialization manually, apply the provided plugin
-in your module:
-
-```kotlin
-plugins {
-    kotlin("multiplatform") // or kotlin("jvm")
-    id("io.github.godox.cloner") version "1.0.0"
-}
-```
-
-The plugin applies `kotlin("plugin.serialization")` and adds the
-`kotlinx-serialization-core` dependency. You still annotate your classes with
-`@Serializable` (or a `@MetaSerializable` marker).
-
-The dependency configuration is configurable:
-
-```kotlin
-cloner {
-    dependencyConfiguration = "api" // default: "implementation"
-    // set to "" to disable adding the dependency automatically
-}
-```
 
 ## Benchmarks
 
