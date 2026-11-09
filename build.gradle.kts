@@ -10,6 +10,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType<Test>().configureEach {
+    testLogging { showStandardStreams = true }
+}
+
 kotlin {
     jvm()
     // Add more targets here as needed, e.g. linuxX64(), iosArm64(), js(IR), wasmJs()
